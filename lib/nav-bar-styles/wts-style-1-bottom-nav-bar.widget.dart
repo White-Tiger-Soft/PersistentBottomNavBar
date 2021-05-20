@@ -84,7 +84,6 @@ class BottomNavStyleWTS1 extends StatelessWidget {
                     MediaQuery.of(context).size.width * 0.05))) /
         this.navBarEssentials!.items!.length);
     return Container(
-      decoration: BoxDecoration(color: Color(0xfff4faff).withOpacity(0.88)),
       width: double.infinity,
       height: this.navBarEssentials!.navBarHeight,
       padding: EdgeInsets.only(
