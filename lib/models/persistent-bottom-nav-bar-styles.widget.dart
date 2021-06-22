@@ -20,6 +20,7 @@ enum NavBarStyle {
   style17,
   style18,
   wts1,
+  wts2,
   neumorphic,
   simple,
 }
