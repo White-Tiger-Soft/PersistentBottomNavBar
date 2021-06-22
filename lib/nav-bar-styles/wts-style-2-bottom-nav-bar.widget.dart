@@ -108,7 +108,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                 width: (this.navBarEssentials!.selectedIndex == 0
                         ? MediaQuery.of(context).size.width * 0.0
                         : itemWidth * this.navBarEssentials!.selectedIndex!) +
-                    (itemWidth - 80) / 2,
+                    (itemWidth - 52) / 2,
                 height: 2.0,
               ),
               Flexible(
@@ -121,7 +121,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  width: 80,
+                  width: 50,
                   height: 2.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
