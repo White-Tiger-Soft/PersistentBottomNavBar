@@ -30,17 +30,14 @@ class BottomNavStyleWTS2 extends StatelessWidget {
               alignment: Alignment.center,
               height: height / 1.0,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                    child: SizedBox(
-                      height: item.iconSize,
-                      width: item.iconSize,
-                      child: isSelected
-                          ? item.icon
-                          : item.inactiveIcon ?? item.icon,
-                    ),
+                  SizedBox(
+                    height: item.iconSize,
+                    width: item.iconSize,
+                    child:
+                        isSelected ? item.icon : item.inactiveIcon ?? item.icon,
                   ),
                   item.title == null
                       ? SizedBox.shrink()
@@ -62,7 +59,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                                         : item.inactiveColorPrimary,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12.0),
-                            child: FittedBox(child: Text(item.title!)),
+                            child: Text(item.title!),
                           ),
                         ),
                 ],
@@ -108,7 +105,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                 width: (this.navBarEssentials!.selectedIndex == 0
                         ? MediaQuery.of(context).size.width * 0.0
                         : itemWidth * this.navBarEssentials!.selectedIndex!) +
-                    (itemWidth - 52) / 2,
+                    (itemWidth - 86) / 2,
                 height: 2.0,
               ),
               Flexible(
@@ -121,7 +118,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  width: 50,
+                  width: 86,
                   height: 2.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(

@@ -134,15 +134,6 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
           });
         },
       ),
-      MainScreen(
-        menuScreenContext: widget.menuScreenContext,
-        hideStatus: _hideNavBar,
-        onScreenHideButtonPressed: () {
-          setState(() {
-            _hideNavBar = !_hideNavBar;
-          });
-        },
-      ),
     ];
   }
 
@@ -168,23 +159,6 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
           },
         ),
       ),
-      PersistentBottomNavBarItem(
-          icon: Icon(Icons.add),
-          title: ("Add"),
-          activeColorPrimary: Colors.blueAccent,
-          activeColorSecondary: Colors.white,
-          inactiveColorPrimary: Colors.white,
-          routeAndNavigatorSettings: RouteAndNavigatorSettings(
-            initialRoute: '/',
-            routes: {
-              '/first': (context) => MainScreen2(),
-              '/second': (context) => MainScreen3(),
-            },
-          ),
-          onPressed: (context) {
-            pushDynamicScreen(context,
-                screen: SampleModalScreen(), withNavBar: true);
-          }),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.message),
         title: ("Messages"),
@@ -243,6 +217,7 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
             : kBottomNavigationBarHeight,
         hideNavigationBarWhenKeyboardShows: true,
         margin: EdgeInsets.all(0.0),
+        padding: NavBarPadding.all(0),
         popActionScreens: PopActionScreensType.all,
         bottomScreenMargin: 0.0,
         onWillPop: (context) async {
@@ -267,9 +242,9 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
           testContext = context;
         },
         hideNavigationBar: _hideNavBar,
-        decoration: NavBarDecoration(
-            colorBehindNavBar: Colors.indigo,
-            borderRadius: BorderRadius.circular(20.0)),
+        // decoration: NavBarDecoration(
+        //     colorBehindNavBar: Colors.indigo,
+        //     borderRadius: BorderRadius.circular(20.0)),
         popAllScreensOnTapOfSelectedTab: true,
         itemAnimationProperties: ItemAnimationProperties(
           duration: Duration(milliseconds: 400),
@@ -281,7 +256,7 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle:
-            NavBarStyle.style17, // Choose the nav bar style with this property
+            NavBarStyle.wts2, // Choose the nav bar style with this property
       ),
     );
   }
