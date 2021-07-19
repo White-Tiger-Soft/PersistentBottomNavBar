@@ -55,6 +55,8 @@ class PersistentBottomNavBarItem {
 
   final RouteAndNavigatorSettings routeAndNavigatorSettings;
 
+  final int? notificationCount;
+
   PersistentBottomNavBarItem(
       {required this.icon,
       this.inactiveIcon,
@@ -70,6 +72,7 @@ class PersistentBottomNavBarItem {
       this.iconSize = 26.0,
       this.onSelectedTabPressWhenNoScreensPushed,
       this.routeAndNavigatorSettings = const RouteAndNavigatorSettings(),
+      this.notificationCount,
       this.onPressed}) {
     assert(opacity >= 0 && opacity <= 1.0);
   }

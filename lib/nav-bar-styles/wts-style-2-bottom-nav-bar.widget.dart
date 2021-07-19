@@ -29,50 +29,60 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                   Curves.ease,
               alignment: Alignment.center,
               height: height / 1.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 4.0),
-                    child: SizedBox(
-                      height: item.iconSize,
-                      width: item.iconSize,
-                      child: isSelected
-                          ? item.icon
-                          : item.inactiveIcon ?? item.icon,
-                    ),
-                  ),
-                  item.title == null
-                      ? SizedBox.shrink()
-                      : Material(
-                          type: MaterialType.transparency,
-                          child: DefaultTextStyle.merge(
-                            style: item.textStyle != null
-                                ? item.textStyle!.apply(
-                                    color: isSelected
-                                        ? (item.activeColorSecondary == null
-                                            ? item.activeColorPrimary
-                                            : item.activeColorSecondary)
-                                        : item.inactiveColorPrimary)
-                                : TextStyle(
-                                    color: isSelected
-                                        ? (item.activeColorSecondary == null
-                                            ? item.activeColorPrimary
-                                            : item.activeColorSecondary)
-                                        : item.inactiveColorPrimary,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12.0),
-                            child: Container(
-                              height: 32,
-                              alignment: Alignment.center,
-                              child: Text(
-                                item.title!,
-                                textAlign: TextAlign.center,
+              child: Stack(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 4.0, top: 6.0),
+                        child: SizedBox(
+                          height: item.iconSize,
+                          width: item.iconSize,
+                          child: isSelected
+                              ? item.icon
+                              : item.inactiveIcon ?? item.icon,
+                        ),
+                      ),
+                      item.title == null
+                          ? SizedBox.shrink()
+                          : Material(
+                              type: MaterialType.transparency,
+                              child: DefaultTextStyle.merge(
+                                style: item.textStyle != null
+                                    ? item.textStyle!.apply(
+                                        color: isSelected
+                                            ? (item.activeColorSecondary == null
+                                                ? item.activeColorPrimary
+                                                : item.activeColorSecondary)
+                                            : item.inactiveColorPrimary)
+                                    : TextStyle(
+                                        color: isSelected
+                                            ? (item.activeColorSecondary == null
+                                                ? item.activeColorPrimary
+                                                : item.activeColorSecondary)
+                                            : item.inactiveColorPrimary,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 11.0),
+                                child: Container(
+                                  height: 32,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    item.title!,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
+                    ],
+                  ),
+                  if ((item.notificationCount ?? 0) > 0)
+                    Positioned(
+                      right: 26,
+                      top: 2,
+                      child: _buildNotificationIcon(item.notificationCount!),
+                    ),
                 ],
               ),
             ),
@@ -137,12 +147,12 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100.0),
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 4.0, bottom: 4),
+              padding: const EdgeInsets.only(bottom: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -174,6 +184,22 @@ class BottomNavStyleWTS2 extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildNotificationIcon(int count) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+      decoration: BoxDecoration(
+        color: Color(0xFFEB4646),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Center(
+        child: Text(
+          count.toString(),
+          style: TextStyle(fontSize: 11, color: Color(0xFFFFFFFF)),
+        ),
       ),
     );
   }

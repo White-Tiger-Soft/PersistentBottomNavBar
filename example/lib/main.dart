@@ -141,14 +141,16 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
     return [
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
-        title: "Home",
+        title: "Главная",
+        iconSize: 24,
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.grey,
         inactiveColorSecondary: Colors.purple,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.search),
-        title: ("Search"),
+        title: ("Заявки клиентов"),
+        iconSize: 24,
         activeColorPrimary: Colors.teal,
         inactiveColorPrimary: Colors.grey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -161,7 +163,9 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.message),
-        title: ("Messages"),
+       iconSize: 24,
+        title: ("Мои заявки"),
+        notificationCount: 1,
         activeColorPrimary: Colors.deepOrange,
         inactiveColorPrimary: Colors.grey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -174,7 +178,8 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.settings),
-        title: ("Settings"),
+        title: ("Мои услуги"),
+        iconSize: 24,
         activeColorPrimary: Colors.indigo,
         inactiveColorPrimary: Colors.grey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -214,7 +219,7 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
         stateManagement: true,
         navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
             ? 0.0
-            : 72,
+            : 74,
         hideNavigationBarWhenKeyboardShows: true,
         margin: EdgeInsets.all(0.0),
         padding: NavBarPadding.all(0),
