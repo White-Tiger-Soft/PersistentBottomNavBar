@@ -214,7 +214,7 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
         stateManagement: true,
         navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
             ? 0.0
-            : kBottomNavigationBarHeight,
+            : 72,
         hideNavigationBarWhenKeyboardShows: true,
         margin: EdgeInsets.all(0.0),
         padding: NavBarPadding.all(0),
