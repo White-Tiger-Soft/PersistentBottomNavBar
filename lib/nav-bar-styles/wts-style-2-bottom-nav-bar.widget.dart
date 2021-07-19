@@ -59,7 +59,10 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                                         : item.inactiveColorPrimary,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12.0),
-                            child: Text(item.title!),
+                            child: Text(
+                              item.title!,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                 ],
