@@ -33,11 +33,15 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    height: item.iconSize,
-                    width: item.iconSize,
-                    child:
-                        isSelected ? item.icon : item.inactiveIcon ?? item.icon,
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 4.0),
+                    child: SizedBox(
+                      height: item.iconSize,
+                      width: item.iconSize,
+                      child: isSelected
+                          ? item.icon
+                          : item.inactiveIcon ?? item.icon,
+                    ),
                   ),
                   item.title == null
                       ? SizedBox.shrink()
@@ -59,9 +63,11 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                                         : item.inactiveColorPrimary,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12.0),
-                            child: Text(
-                              item.title!,
-                              textAlign: TextAlign.center,
+                            child: Expanded(
+                              child: Text(
+                                item.title!,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ),
@@ -134,7 +140,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.only(top: 4.0, bottom: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
