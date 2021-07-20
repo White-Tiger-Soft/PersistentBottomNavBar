@@ -198,7 +198,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
       child: Center(
         child: Text(
           count.toString(),
-          style: TextStyle(fontSize: 11, color: Color(0xFFFFFFFF)),
+          style: TextStyle(fontSize: 9, color: Color(0xFFFFFFFF)),
         ),
       ),
     );
