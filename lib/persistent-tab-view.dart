@@ -56,3 +56,4 @@ part 'nav-bar-styles/wts-style-1-bottom-nav-bar.widget.dart';
 part 'nav-bar-styles/wts-style-2-bottom-nav-bar.widget.dart';
 part 'nav-bar-styles/simple-bottom-nav-bar.widget.dart';
 part 'nav-bar-styles/neumorphic-bottom-nav-bar.widget.dart';
+part 'nav-bar-styles/wts-style-medical-bottom-nav-bar.widget.dart';

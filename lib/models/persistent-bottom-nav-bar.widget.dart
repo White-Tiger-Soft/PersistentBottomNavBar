@@ -292,8 +292,12 @@ class PersistentBottomNavBar extends StatelessWidget {
           return BottomNavStyleWTS1(
             navBarEssentials: this.navBarEssentials,
           );
-          case NavBarStyle.wts2:
+        case NavBarStyle.wts2:
           return BottomNavStyleWTS2(
+            navBarEssentials: this.navBarEssentials,
+          );
+        case NavBarStyle.wts_medical:
+          return BottomNavStyleWTSMedical(
             navBarEssentials: this.navBarEssentials,
           );
         default:
