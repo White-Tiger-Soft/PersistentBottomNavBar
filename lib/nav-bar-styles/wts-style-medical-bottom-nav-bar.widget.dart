@@ -8,67 +8,84 @@ class BottomNavStyleWTSMedical extends StatelessWidget {
     this.navBarEssentials = const NavBarEssentials(items: null),
   });
 
-  Widget _buildItem(PersistentBottomNavBarItem item, bool isSelected,
-      double? height, {bool isCenterItem = false}) {
+  Widget _buildItem(
+      PersistentBottomNavBarItem item, bool isSelected, double? height,
+      {bool isCenterItem = false}) {
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
         : AnimatedContainer(
-      width: 86.0,
-      height: height! / 1.0,
-      duration:
-      this.navBarEssentials!.itemAnimationProperties?.duration ??
-          Duration(milliseconds: 1000),
-      curve: this.navBarEssentials!.itemAnimationProperties?.curve ??
-          Curves.ease,
-      alignment: Alignment.center,
-      child: AnimatedContainer(
-        duration:
-        this.navBarEssentials!.itemAnimationProperties?.duration ??
-            Duration(milliseconds: 1000),
-        curve: this.navBarEssentials!.itemAnimationProperties?.curve ??
-            Curves.ease,
-        alignment: Alignment.center,
-        height: height / 1.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: SizedBox(
-                height: item.iconSize,
-                width: item.iconSize,
-                child: isSelected
-                    ? item.icon
-                    : item.inactiveIcon ?? item.icon,
+            width: 86.0,
+            height: height! / 1.0,
+            duration:
+                this.navBarEssentials!.itemAnimationProperties?.duration ??
+                    Duration(milliseconds: 1000),
+            curve: this.navBarEssentials!.itemAnimationProperties?.curve ??
+                Curves.ease,
+            alignment: Alignment.center,
+            child: AnimatedContainer(
+              duration:
+                  this.navBarEssentials!.itemAnimationProperties?.duration ??
+                      Duration(milliseconds: 1000),
+              curve: this.navBarEssentials!.itemAnimationProperties?.curve ??
+                  Curves.ease,
+              alignment: Alignment.center,
+              height: height / 1.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  if (isCenterItem)
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xFF0B485A), width: 2)
+                                ,borderRadius: BorderRadius.circular(8)
+                          ),
+                          padding: EdgeInsets.all(6),
+                          child: item.icon,
+                        ),
+                      ),
+                    ),
+                  if (!isCenterItem) ...[
+                    Expanded(
+                      child: SizedBox(
+                        height: item.iconSize,
+                        width: item.iconSize,
+                        child: isSelected
+                            ? item.icon
+                            : item.inactiveIcon ?? item.icon,
+                      ),
+                    ),
+                    (item.title == null)
+                        ? SizedBox.shrink()
+                        : Material(
+                            type: MaterialType.transparency,
+                            child: DefaultTextStyle.merge(
+                              style: item.textStyle != null
+                                  ? item.textStyle!.apply(
+                                      color: isSelected
+                                          ? (item.activeColorSecondary == null
+                                              ? item.activeColorPrimary
+                                              : item.activeColorSecondary)
+                                          : item.inactiveColorPrimary)
+                                  : TextStyle(
+                                      color: isSelected
+                                          ? (item.activeColorSecondary == null
+                                              ? item.activeColorPrimary
+                                              : item.activeColorSecondary)
+                                          : item.inactiveColorPrimary,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12.0),
+                              child: FittedBox(child: Text(item.title!)),
+                            ),
+                          ),
+                  ],
+                ],
               ),
             ),
-            (item.title == null) || (isCenterItem)
-                ? SizedBox.shrink()
-                : Material(
-              type: MaterialType.transparency,
-              child: DefaultTextStyle.merge(
-                style: item.textStyle != null
-                    ? item.textStyle!.apply(
-                    color: isSelected
-                        ? (item.activeColorSecondary == null
-                        ? item.activeColorPrimary
-                        : item.activeColorSecondary)
-                        : item.inactiveColorPrimary)
-                    : TextStyle(
-                    color: isSelected
-                        ? (item.activeColorSecondary == null
-                        ? item.activeColorPrimary
-                        : item.activeColorSecondary)
-                        : item.inactiveColorPrimary,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12.0),
-                child: FittedBox(child: Text(item.title!)),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   @override
@@ -77,20 +94,11 @@ class BottomNavStyleWTSMedical extends StatelessWidget {
         .navBarEssentials!
         .items![this.navBarEssentials!.selectedIndex!]
         .activeColorPrimary;
-    double itemWidth = ((MediaQuery
-        .of(context)
-        .size
-        .width -
-        ((this.navBarEssentials!.padding?.left ??
-            MediaQuery
-                .of(context)
-                .size
-                .width * 0.05) +
-            (this.navBarEssentials!.padding?.right ??
-                MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.05))) /
+    double itemWidth = ((MediaQuery.of(context).size.width -
+            ((this.navBarEssentials!.padding?.left ??
+                    MediaQuery.of(context).size.width * 0.05) +
+                (this.navBarEssentials!.padding?.right ??
+                    MediaQuery.of(context).size.width * 0.05))) /
         this.navBarEssentials!.items!.length);
     return Container(
       width: double.infinity,
@@ -98,15 +106,9 @@ class BottomNavStyleWTSMedical extends StatelessWidget {
       padding: EdgeInsets.only(
           top: this.navBarEssentials!.padding?.top ?? 0.0,
           left: this.navBarEssentials!.padding?.left ??
-              MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.05,
+              MediaQuery.of(context).size.width * 0.05,
           right: this.navBarEssentials!.padding?.right ??
-              MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.05,
+              MediaQuery.of(context).size.width * 0.05,
           bottom: this.navBarEssentials!.padding?.bottom ??
               this.navBarEssentials!.navBarHeight! * 0.1),
       child: Column(
@@ -132,11 +134,7 @@ class BottomNavStyleWTSMedical extends StatelessWidget {
                         }
                       },
                       child: Container(
-                        decoration: index == 2 ? BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Color(0xff0B485A), width: 2
-                            )
-                        ) : BoxDecoration(color: Colors.transparent),
+                        decoration: BoxDecoration(color: Colors.transparent),
                         child: _buildItem(
                             item,
                             this.navBarEssentials!.selectedIndex == index,
