@@ -8,12 +8,12 @@ class BottomNavStyleWTS2 extends StatelessWidget {
     this.navBarEssentials = const NavBarEssentials(items: null),
   });
 
-  Widget _buildItem(
-      PersistentBottomNavBarItem item, bool isSelected, double? height) {
+  Widget _buildItem(PersistentBottomNavBarItem item, bool isSelected,
+      double? height, double itemWidth) {
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
         : AnimatedContainer(
-            width: 86.0,
+            width: itemWidth,
             height: height! / 1.0,
             duration:
                 this.navBarEssentials!.itemAnimationProperties?.duration ??
@@ -101,6 +101,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                 (this.navBarEssentials!.padding?.right ??
                     MediaQuery.of(context).size.width * 0.05))) /
         this.navBarEssentials!.items!.length);
+    print("$itemWidth");
     return Container(
       width: double.infinity,
       height: this.navBarEssentials!.navBarHeight,
@@ -124,9 +125,8 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                     Curves.ease,
                 color: Colors.transparent,
                 width: (this.navBarEssentials!.selectedIndex == 0
-                        ? MediaQuery.of(context).size.width * 0.0
-                        : itemWidth * this.navBarEssentials!.selectedIndex!) +
-                    (itemWidth - 86) / 2,
+                    ? MediaQuery.of(context).size.width * 0.0
+                    : itemWidth * this.navBarEssentials!.selectedIndex!),
                 height: 2.0,
               ),
               Flexible(
@@ -139,7 +139,7 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  width: 86,
+                  width: itemWidth,
                   height: 2.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -175,7 +175,8 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                         child: _buildItem(
                             item,
                             this.navBarEssentials!.selectedIndex == index,
-                            this.navBarEssentials!.navBarHeight),
+                            this.navBarEssentials!.navBarHeight,
+                            itemWidth),
                       ),
                     ),
                   );
