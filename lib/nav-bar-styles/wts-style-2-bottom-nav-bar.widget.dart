@@ -101,7 +101,6 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                 (this.navBarEssentials!.padding?.right ??
                     MediaQuery.of(context).size.width * 0.05))) /
         this.navBarEssentials!.items!.length);
-    print("$itemWidth");
     return Container(
       width: double.infinity,
       height: this.navBarEssentials!.navBarHeight,
@@ -199,7 +198,12 @@ class BottomNavStyleWTS2 extends StatelessWidget {
       child: Center(
         child: Text(
           count.toString(),
-          style: TextStyle(fontSize: 9, color: Color(0xFFFFFFFF)),
+          style: TextStyle(
+            fontSize: 9,
+            color: Color(0xFFFFFFFF),
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+          ),
         ),
       ),
     );
