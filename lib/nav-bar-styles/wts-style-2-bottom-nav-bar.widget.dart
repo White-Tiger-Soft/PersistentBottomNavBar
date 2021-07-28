@@ -81,7 +81,8 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                     Positioned(
                       right: 26,
                       top: 2,
-                      child: _buildNotificationIcon(item.notificationCount!),
+                      child: _buildNotificationIcon(
+                          item.notificationCount!, item.notificationTextStyle),
                     ),
                 ],
               ),
@@ -188,23 +189,23 @@ class BottomNavStyleWTS2 extends StatelessWidget {
     );
   }
 
-  Widget _buildNotificationIcon(int count) {
+  Widget _buildNotificationIcon(int count, TextStyle? notificationTextStyle) {
     return Container(
+      alignment: Alignment.center,
       padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
       decoration: BoxDecoration(
         color: Color(0xFFEB4646),
         borderRadius: BorderRadius.circular(4),
       ),
-      child: Center(
-        child: Text(
-          count.toString(),
-          style: TextStyle(
-            fontSize: 9,
-            color: Color(0xFFFFFFFF),
-            fontWeight: FontWeight.w400,
-            fontStyle: FontStyle.normal,
-          ),
-        ),
+      child: Text(
+        count.toString(),
+        style: notificationTextStyle ??
+            TextStyle(
+              fontSize: 9,
+              color: Color(0xFFFFFFFF),
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.normal,
+            ),
       ),
     );
   }

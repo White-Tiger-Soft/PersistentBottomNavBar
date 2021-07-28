@@ -57,6 +57,8 @@ class PersistentBottomNavBarItem {
 
   final int? notificationCount;
 
+  final TextStyle? notificationTextStyle;
+
   PersistentBottomNavBarItem(
       {required this.icon,
       this.inactiveIcon,
@@ -73,6 +75,7 @@ class PersistentBottomNavBarItem {
       this.onSelectedTabPressWhenNoScreensPushed,
       this.routeAndNavigatorSettings = const RouteAndNavigatorSettings(),
       this.notificationCount,
+      this.notificationTextStyle,
       this.onPressed}) {
     assert(opacity >= 0 && opacity <= 1.0);
   }
