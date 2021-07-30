@@ -16,6 +16,7 @@ class PersistentTabView extends PersistentTabViewBase {
 
   ///Background color of bottom navigation bar. `white` by default.
   final Color backgroundColor;
+  final Color? containerBackgroundColor;
 
   ///A custom widget which is displayed at the bottom right of the display at all times.
   final Widget? floatingActionButton;
@@ -89,6 +90,7 @@ class PersistentTabView extends PersistentTabViewBase {
       ItemAnimationProperties? itemAnimationProperties,
       this.hideNavigationBar,
       this.screenTransitionAnimation = const ScreenTransitionAnimation(),
+      this.containerBackgroundColor,
       NavBarStyle navBarStyle = NavBarStyle.style1})
       : super(
           key: key,
@@ -119,6 +121,7 @@ class PersistentTabView extends PersistentTabViewBase {
           handleAndroidBackButtonPress: handleAndroidBackButtonPress,
           hideNavigationBar: hideNavigationBar,
           screenTransitionAnimation: screenTransitionAnimation,
+          containerBackgroundColor: containerBackgroundColor,
         ) {
     assert(items != null,
         "Items can only be null in case of custom navigation bar style. Please add the items!");
@@ -152,6 +155,7 @@ class PersistentTabView extends PersistentTabViewBase {
     this.handleAndroidBackButtonPress = true,
     this.hideNavigationBar,
     this.screenTransitionAnimation = const ScreenTransitionAnimation(),
+    this.containerBackgroundColor,
   }) : super(
           key: key,
           context: context,
@@ -173,6 +177,7 @@ class PersistentTabView extends PersistentTabViewBase {
           screenTransitionAnimation: screenTransitionAnimation,
           isCustomWidget: true,
           decoration: NavBarDecoration(),
+          containerBackgroundColor: containerBackgroundColor,
         ) {
     assert(itemCount == screens.length,
         "screens and items length should be same. If you are using the onPressed callback function of 'PersistentBottomNavBarItem', enter a dummy screen like Container() in its place in the screens");
@@ -284,6 +289,8 @@ class PersistentTabViewBase extends StatefulWidget {
 
   final Function(BuildContext)? selectedTabScreenContext;
 
+  final Color? containerBackgroundColor;
+
   const PersistentTabViewBase({
     Key? key,
     this.screens,
@@ -316,6 +323,7 @@ class PersistentTabViewBase extends StatefulWidget {
     this.isCustomWidget,
     this.selectedTabScreenContext,
     this.routeAndNavigatorSettings,
+    this.containerBackgroundColor,
   }) : super(key: key);
 
   @override
@@ -579,6 +587,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
               widget.hideNavigationBarWhenKeyboardShows,
           resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           animatePadding: _isAnimating! || _isCompleted!,
+          containerBackgroundColor: widget.containerBackgroundColor,
           tabBar: PersistentBottomNavBar(
             navBarEssentials: NavBarEssentials(
               selectedIndex: _controller!.index,

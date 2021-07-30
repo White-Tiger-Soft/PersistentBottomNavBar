@@ -7,6 +7,7 @@ class PersistentTabController extends ChangeNotifier {
         assert(initialIndex >= 0);
 
   bool _isDisposed = false;
+
   int get index => _index;
   int _index;
 
@@ -50,6 +51,7 @@ class PersistentTabScaffold extends StatefulWidget {
     this.hideNavigationBarWhenKeyboardShows,
     this.itemCount,
     this.animatePadding = false,
+    this.containerBackgroundColor,
   })  : assert(
             controller == null || controller.index < itemCount!,
             "The PersistentTabController's current index ${controller.index} is "
@@ -63,6 +65,7 @@ class PersistentTabScaffold extends StatefulWidget {
   final IndexedWidgetBuilder tabBuilder;
 
   final Color? backgroundColor;
+  final Color? containerBackgroundColor;
 
   final bool resizeToAvoidBottomInset;
 
@@ -149,6 +152,7 @@ class _PersistentTabScaffoldState extends State<PersistentTabScaffold> {
       stateManagement: widget.stateManagement,
       screenTransitionAnimation: widget.screenTransitionAnimation,
       backgroundColor: widget.tabBar.navBarEssentials!.backgroundColor,
+      containerBackgroundColor: widget.containerBackgroundColor,
     );
     double contentPadding = 0.0;
 
@@ -275,6 +279,7 @@ class _TabSwitchingView extends StatefulWidget {
     required this.tabBuilder,
     required this.screenTransitionAnimation,
     required this.backgroundColor,
+    this.containerBackgroundColor = CupertinoColors.black,
   }) : assert(tabCount != null && tabCount > 0);
 
   final int currentTabIndex;
@@ -283,6 +288,7 @@ class _TabSwitchingView extends StatefulWidget {
   final bool? stateManagement;
   final ScreenTransitionAnimation? screenTransitionAnimation;
   final Color? backgroundColor;
+  final Color? containerBackgroundColor;
 
   @override
   _TabSwitchingViewState createState() => _TabSwitchingViewState();
@@ -415,7 +421,7 @@ class _TabSwitchingViewState extends State<_TabSwitchingView>
 
   Widget _buildScreens() {
     return Container(
-      color: CupertinoColors.black,
+      color: widget.containerBackgroundColor,
       child: Stack(
         fit: StackFit.expand,
         children: List<Widget>.generate(widget.tabCount!, (int index) {
