@@ -12,8 +12,10 @@ class PersistentBottomNavBar extends StatelessWidget {
     this.navBarEssentials,
     this.navBarDecoration,
     this.navBarStyle,
+    this.customStyleBuilder,
     this.isCustomWidget = false,
-  }) : super(key: key);
+  })  : assert(navBarStyle == null || customStyleBuilder == null),
+        super(key: key);
 
   final NavBarEssentials? navBarEssentials;
   final EdgeInsets? margin;
@@ -25,6 +27,7 @@ class PersistentBottomNavBar extends StatelessWidget {
   final bool? hideNavigationBar;
   final Function(bool, bool)? onAnimationComplete;
   final bool? isCustomWidget;
+  final Widget? Function(NavBarEssentials)? customStyleBuilder;
 
   Widget _navBarWidget() => Padding(
         padding: this.margin!,
@@ -180,6 +183,7 @@ class PersistentBottomNavBar extends StatelessWidget {
       Function? onAnimationComplete,
       bool? hideNavigationBar,
       bool? isCustomWidget,
+      Widget? Function(NavBarEssentials)? customStyleBuilder,
       EdgeInsets? padding}) {
     return PersistentBottomNavBar(
         confineToSafeArea: confineToSafeArea ?? this.confineToSafeArea,
@@ -192,6 +196,7 @@ class PersistentBottomNavBar extends StatelessWidget {
             onAnimationComplete as dynamic Function(bool, bool)? ??
                 this.onAnimationComplete,
         navBarEssentials: navBarEssentials ?? this.navBarEssentials,
+        customStyleBuilder: customStyleBuilder ?? this.customStyleBuilder,
         isCustomWidget: isCustomWidget ?? this.isCustomWidget,
         navBarDecoration: navBarDecoration ?? this.navBarDecoration);
   }
@@ -205,6 +210,8 @@ class PersistentBottomNavBar extends StatelessWidget {
   Widget? getNavBarStyle() {
     if (isCustomWidget!) {
       return customNavBarWidget;
+    } else if (customStyleBuilder != null) {
+      return customStyleBuilder!(this.navBarEssentials!);
     } else {
       switch (navBarStyle) {
         case NavBarStyle.style1:

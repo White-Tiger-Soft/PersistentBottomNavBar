@@ -290,6 +290,7 @@ class PersistentTabViewBase extends StatefulWidget {
   final Function(BuildContext)? selectedTabScreenContext;
 
   final Color? containerBackgroundColor;
+  final Widget? Function(NavBarEssentials)? navBarStyleBuilder;
 
   const PersistentTabViewBase({
     Key? key,
@@ -311,6 +312,7 @@ class PersistentTabViewBase extends StatefulWidget {
     this.decoration,
     this.padding,
     this.navBarStyle,
+    this.navBarStyleBuilder,
     this.neumorphicProperties,
     this.navBarHeight,
     this.customWidget,
@@ -589,6 +591,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
           animatePadding: _isAnimating! || _isCompleted!,
           containerBackgroundColor: widget.containerBackgroundColor,
           tabBar: PersistentBottomNavBar(
+            customStyleBuilder: widget.navBarStyleBuilder,
             navBarEssentials: NavBarEssentials(
               selectedIndex: _controller!.index,
               previousIndex: _previousIndex,
