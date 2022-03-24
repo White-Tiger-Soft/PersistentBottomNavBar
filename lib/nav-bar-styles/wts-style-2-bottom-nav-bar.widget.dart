@@ -77,13 +77,19 @@ class BottomNavStyleWTS2 extends StatelessWidget {
                             ),
                     ],
                   ),
-                  if ((item.notificationCount ?? 0) > 0)
-                    Positioned(
-                      right: 26,
-                      top: 2,
-                      child: _buildNotificationIcon(
-                          item.notificationCount!, item.notificationTextStyle),
-                    ),
+                  ValueListenableBuilder<int>(
+                      valueListenable: item.notificationCountNotifier!,
+                      builder: (context, value, child) {
+                        if (value == 0) {
+                          return SizedBox.shrink();
+                        }
+                        return Positioned(
+                          right: 26,
+                          top: 2,
+                          child: _buildNotificationIcon(
+                              value, item.notificationTextStyle),
+                        );
+                      })
                 ],
               ),
             ),

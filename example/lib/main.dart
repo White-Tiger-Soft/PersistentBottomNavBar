@@ -85,6 +85,8 @@ class ProvidedStylesExample extends StatefulWidget {
   _ProvidedStylesExampleState createState() => _ProvidedStylesExampleState();
 }
 
+ValueNotifier<int> bageCount = ValueNotifier(1);
+
 class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
   PersistentTabController _controller;
   bool _hideNavBar;
@@ -163,9 +165,9 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.message),
-       iconSize: 24,
+        iconSize: 24,
         title: ("Мои заявки"),
-        notificationCount: 1,
+        notificationCountNotifier: bageCount,
         activeColorPrimary: Colors.deepOrange,
         inactiveColorPrimary: Colors.grey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -217,9 +219,7 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         stateManagement: true,
-        navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
-            ? 0.0
-            : 74,
+        navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0 ? 0.0 : 74,
         hideNavigationBarWhenKeyboardShows: true,
         margin: EdgeInsets.all(0.0),
         padding: NavBarPadding.all(0),
