@@ -64,6 +64,8 @@ class PersistentTabView extends PersistentTabViewBase {
 
   final BuildContext context;
 
+  final Widget? Function(NavBarEssentials)? navBarStyleBuilder;
+
   PersistentTabView(this.context,
       {Key? key,
       List<PersistentBottomNavBarItem>? items,
@@ -91,7 +93,8 @@ class PersistentTabView extends PersistentTabViewBase {
       this.hideNavigationBar,
       this.screenTransitionAnimation = const ScreenTransitionAnimation(),
       this.containerBackgroundColor,
-      NavBarStyle navBarStyle = NavBarStyle.style1})
+      NavBarStyle? navBarStyle,
+      this.navBarStyleBuilder})
       : super(
           key: key,
           context: context,
@@ -105,6 +108,7 @@ class PersistentTabView extends PersistentTabViewBase {
               hideNavigationBarWhenKeyboardShows,
           itemAnimationProperties: itemAnimationProperties,
           navBarStyle: navBarStyle,
+          navBarStyleBuilder: navBarStyleBuilder,
           popActionScreens: popActionScreens,
           popAllScreensOnTapOfSelectedTab: popAllScreensOnTapOfSelectedTab,
           navBarHeight: navBarHeight,
@@ -125,8 +129,11 @@ class PersistentTabView extends PersistentTabViewBase {
         ) {
     assert(items != null,
         "Items can only be null in case of custom navigation bar style. Please add the items!");
-    assert(assertMidButtonStyles(navBarStyle, items!.length),
-        "NavBar styles 15-18 only accept 3 or 5 PersistentBottomNavBarItem items.");
+    assert(navBarStyle != null || navBarStyleBuilder != null,
+        "navBarStyle and navBarStyleBuilder can`t be both null");
+    if (navBarStyle != null)
+      assert(assertMidButtonStyles(navBarStyle, items!.length),
+          "NavBar styles 15-18 only accept 3 or 5 PersistentBottomNavBarItem items.");
     assert(items!.length == screens.length,
         "screens and items length should be same. If you are using the onPressed callback function of 'PersistentBottomNavBarItem', enter a dummy screen like Container() in its place in the screens");
     assert(items!.length >= 2 && items.length <= 6,
@@ -156,6 +163,7 @@ class PersistentTabView extends PersistentTabViewBase {
     this.hideNavigationBar,
     this.screenTransitionAnimation = const ScreenTransitionAnimation(),
     this.containerBackgroundColor,
+    this.navBarStyleBuilder,
   }) : super(
           key: key,
           context: context,
@@ -167,6 +175,7 @@ class PersistentTabView extends PersistentTabViewBase {
           floatingActionButton: floatingActionButton,
           customWidget: customWidget,
           itemCount: itemCount,
+          navBarStyleBuilder: navBarStyleBuilder,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           bottomScreenMargin: bottomScreenMargin,
           onWillPop: onWillPop,
@@ -375,7 +384,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
       }
     });
     if (widget.selectedTabScreenContext != null) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         widget.selectedTabScreenContext!(_contextList[_controller!.index]);
       });
     }
