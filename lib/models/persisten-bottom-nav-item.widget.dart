@@ -64,11 +64,11 @@ class PersistentBottomNavBarItem {
 
   final TextStyle? notificationTextStyle;
 
-  TypeCounterBadge needCountInsideNotificationBadge;
+  TypeCounterBadge typeCountInsideNotificationBadge;
 
   PersistentBottomNavBarItem(
       {required this.icon,
-      this.needCountInsideNotificationBadge = TypeCounterBadge.counter,
+      this.typeCountInsideNotificationBadge = TypeCounterBadge.counter,
       this.inactiveIcon,
       this.title,
       this.contentPadding = 5.0,
