@@ -1,5 +1,10 @@
 part of persistent_bottom_nav_bar;
 
+enum BadgeType {
+  counter,
+  dot,
+}
+
 ///An item widget for the `PersistentTabView`.
 class PersistentBottomNavBarItem {
   ///Icon for the bar item.
@@ -59,11 +64,11 @@ class PersistentBottomNavBarItem {
 
   final TextStyle? notificationTextStyle;
 
-  bool needCountInsideNotificationBadge;
+  BadgeType badgeType;
 
   PersistentBottomNavBarItem(
       {required this.icon,
-      this.needCountInsideNotificationBadge = true,
+      this.badgeType = BadgeType.counter,
       this.inactiveIcon,
       this.title,
       this.contentPadding = 5.0,
