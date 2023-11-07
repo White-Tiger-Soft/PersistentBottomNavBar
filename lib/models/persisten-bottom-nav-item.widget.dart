@@ -1,6 +1,6 @@
 part of persistent_bottom_nav_bar;
 
-enum TypeCounterBadge {
+enum BadgeType {
   counter,
   dot,
 }
@@ -64,11 +64,11 @@ class PersistentBottomNavBarItem {
 
   final TextStyle? notificationTextStyle;
 
-  TypeCounterBadge typeCountInsideNotificationBadge;
+  BadgeType badgeType;
 
   PersistentBottomNavBarItem(
       {required this.icon,
-      this.typeCountInsideNotificationBadge = TypeCounterBadge.counter,
+      this.badgeType = BadgeType.counter,
       this.inactiveIcon,
       this.title,
       this.contentPadding = 5.0,
